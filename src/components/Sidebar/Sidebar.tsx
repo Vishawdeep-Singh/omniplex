@@ -9,7 +9,7 @@ import Plugins from "../Plugins/Plugins";
 import Profile from "../Profile/Profile";
 import Settings from "../Settings/Settings";
 import Auth from "../Auth/Auth";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectAuthState } from "@/store/authSlice";
 import { useDisclosure } from "@nextui-org/modal";
@@ -29,7 +29,10 @@ import User from "../../../public/svgs/sidebar/User.svg";
 import Collapse from "../../../public/svgs/sidebar/Collapse.svg";
 
 const Sidebar = () => {
+  const hideSidebar = ["/login"]
   const router = useRouter();
+  const pathname = usePathname();
+  const showSidebar = !hideSidebar.includes(pathname)
   const authState = useSelector(selectAuthState);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selected, setSelected] = useState("history");
@@ -103,8 +106,10 @@ const Sidebar = () => {
     router.push("/");
   };
 
+  if(!showSidebar) return null;
+
   return (
-    <>
+    <div>
       <div className={styles.header}>
         <div onClick={toggleSidebar} className={styles.menu}>
           <Image priority={true} src={Menu} alt="Menu" width={24} height={24} />
@@ -238,7 +243,7 @@ const Sidebar = () => {
         </>
       )}
       <Auth isOpen={isOpen} onClose={onClose} />
-    </>
+    </div>
   );
 };
 

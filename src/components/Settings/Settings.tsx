@@ -30,6 +30,7 @@ import { MODELS } from "@/utils/data";
 
 import Info from "../../../public/svgs/Info.svg";
 import Selector from "../../../public/svgs/Selector.svg";
+import { useRouter } from "next/navigation";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const Settings = () => {
   const [customPrompt, setCustomPromptLocal] = useState(aiCustomPrompt);
   const [hasChanges, setHasChanges] = useState(false);
   const initialLoad = useRef(true);
+  const router = useRouter()
 
   useEffect(() => {
     if (initialLoad.current) {
@@ -110,8 +112,8 @@ const Settings = () => {
     dispatch(resetAISettings());
   };
 
-  const handleModal = () => {
-    onOpen();
+  const handleClick = () => {
+    router.push('/login')
   };
 
   return (
@@ -272,13 +274,13 @@ const Settings = () => {
       {!isAuthenticated && (
         <div className={styles.modalOverlay}>
           {!isAuthenticated && (
-            <div className={styles.modalButton} onClick={() => handleModal()}>
+            <div className={styles.modalButton} onClick={() => handleClick()}>
               Sign In
             </div>
           )}
         </div>
       )}
-      <Auth isOpen={isOpen} onClose={onClose} />
+      
     </div>
   );
 };

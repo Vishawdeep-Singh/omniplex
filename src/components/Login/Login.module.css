@@ -1,0 +1,25 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0.75rem;
+  margin: auto;
+}
+.second {
+  background-color: #f0f0f0;
+  height: clamp(40rem, 97vh, 97vh);
+  width: clamp(30rem, 100%, 100%);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.7rem;
+}
+
+@media (max-width: 768px) {
+  .second {
+    display: none;
+  }
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -22,6 +22,7 @@ import { db } from "../../../firebaseConfig";
 
 import Bin from "../../../public/svgs/Bin.svg";
 import FolderInactive from "../../../public/svgs/sidebar/Folder_Inactive.svg";
+import { useRouter } from "next/navigation";
 
 const Library = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,6 +31,7 @@ const Library = () => {
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [libraryData, setLibraryData] = useState<LibraryItem[]>([]);
+  const router = useRouter()
 
   useEffect(() => {
     fetchLibraryData();
@@ -63,7 +65,7 @@ const Library = () => {
   };
 
   const handleAuth = () => {
-    onOpen();
+    router.push("/login");
   };
 
   return (
@@ -135,7 +137,7 @@ const Library = () => {
           </div>
         </div>
       )}
-      <Auth isOpen={isOpen} onClose={onClose} />
+      
     </div>
   );
 };

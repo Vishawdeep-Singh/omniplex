@@ -75,7 +75,7 @@ const History = () => {
   };
 
   const handleAuth = () => {
-    onOpen();
+   router.push("/login");
   };
 
   return (
@@ -166,7 +166,7 @@ const History = () => {
           </div>
         </div>
       )}
-      <Auth isOpen={isOpen} onClose={onClose} />
+      
     </div>
   );
 };
